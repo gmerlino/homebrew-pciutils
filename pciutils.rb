@@ -9,9 +9,14 @@ class Pciutils < Formula
   def install
     system "make", "PREFIX=#{prefix}", "install"
   end
+
   def caveats; <<~EOS
     In order to make some tools, e.g., lspci, actually work, you need to
     run as root 'nvram boot-args="debug=0x144"' from the recovery console
-    EOS
+  EOS
+  end
+
+  test do
+    system "#{bin}/lspci", "--help"
   end
 end
